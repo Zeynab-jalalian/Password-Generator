@@ -5,14 +5,15 @@ const passwordInput = document.querySelector(".password-box input"), //display p
     button = document.querySelector(".generate-button"); //button for generate password
 
 
-let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:'\",.<>/?"; 
+let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:'\",.<>/?";
 const generatePassword = () => {
     let newPassword = "";
-    for(let i=0;i<rangeInput.value;i++){
-        let randomNumbers = Math.floor(Math.random() * chars.length);  
-        newPassword+=chars[randomNumbers];
+    for (let i = 0; i < rangeInput.value; i++) {
+        let randomNumbers = Math.floor(Math.random() * chars.length);
+        newPassword += chars[randomNumbers];
     }
-    passwordInput.value=newPassword;
+    passwordInput.value = newPassword;
+    copyIcon.classList.replace("ri-clipboard-line", "ri-file-copy-line");
 }
 
 rangeInput.addEventListener("input", () => {
@@ -21,4 +22,10 @@ rangeInput.addEventListener("input", () => {
 })
 
 button.addEventListener("click", generatePassword);
+generatePassword();
 
+
+copyIcon.addEventListener("click", () => {
+    navigator.clipboard.writeText(passwordInput.value);
+    copyIcon.classList.replace("ri-file-copy-line", "ri-clipboard-line");
+})
